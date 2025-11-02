@@ -1,10 +1,12 @@
 /**
  * Farm Dashboard - Main Hub
  * Central navigation for all farm management features
+ * Client Component version
  */
 
+"use client"
+
 import Link from "next/link"
-import dynamic from "next/dynamic"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -20,21 +22,10 @@ import {
   Satellite,
   Zap,
   TrendingUp,
-  Users
+  Users,
+  Mountain,
+  Navigation
 } from "lucide-react"
-
-// ✅ Dynamically import 3D component (to avoid SSR issues)
-const SimpleWorking3D = dynamic(() => import("@/components/simple-working-3d"), {
-  ssr: false,
-  loading: () => (
-    <div className="h-64 flex items-center justify-center text-gray-400">
-      Loading 3D terrain...
-    </div>
-  )
-})
-
-// ✅ Mark page as dynamic (important when fetching live NASA data)
-export const dynamicMode = "force-dynamic"
 
 const farmFeatures = [
   {
@@ -105,6 +96,71 @@ const quickStats = [
   { label: 'Sustainability Score', value: '85%', change: '+3%', color: 'text-emerald-400' },
   { label: 'Yield Prediction', value: '92t/ha', change: '+5%', color: 'text-yellow-400' }
 ]
+
+// Simple 3D-like terrain preview using CSS
+function SimpleTerrainPreview() {
+  return (
+    <div className="w-full h-64 bg-gradient-to-b from-sky-700 via-green-600 to-green-800 rounded-lg overflow-hidden relative">
+      {/* Sky */}
+      <div className="absolute inset-0 bg-gradient-to-b from-sky-400 to-sky-600">
+        {/* Sun */}
+        <div className="absolute top-4 right-8 w-12 h-12 bg-yellow-300 rounded-full shadow-2xl shadow-yellow-400/50" />
+        
+        {/* Clouds */}
+        <div className="absolute top-8 left-8 w-16 h-8 bg-white/30 rounded-full" 
+             style={{ animation: 'float 6s ease-in-out infinite' }} />
+        <div className="absolute top-12 right-16 w-20 h-6 bg-white/20 rounded-full" 
+             style={{ animation: 'float 6s ease-in-out infinite 1s' }} />
+        
+        {/* Satellite */}
+        <div className="absolute top-4 left-1/4" 
+             style={{ animation: 'orbit 20s linear infinite' }}>
+          <Satellite className="w-6 h-6 text-blue-300" />
+        </div>
+      </div>
+      
+      {/* Terrain */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-green-700 to-green-500 rounded-t-3xl">
+        {/* Fields */}
+        <div className="absolute bottom-8 left-8 w-20 h-12 bg-green-600 rounded-lg transform rotate-3 shadow-lg" />
+        <div className="absolute bottom-12 right-12 w-16 h-10 bg-green-500 rounded-lg transform -rotate-2 shadow-lg" />
+        <div className="absolute bottom-16 left-20 w-24 h-8 bg-green-400 rounded-lg shadow-lg" />
+        
+        {/* Data points */}
+        <div className="absolute bottom-20 left-1/3 w-4 h-4 bg-red-500 rounded-full shadow-lg" 
+             style={{ animation: 'pulse 2s ease-in-out infinite' }} />
+        <div className="absolute bottom-24 right-1/4 w-4 h-4 bg-green-500 rounded-full shadow-lg" 
+             style={{ animation: 'pulse 2s ease-in-out infinite 0.5s' }} />
+        <div className="absolute bottom-18 left-1/2 w-4 h-4 bg-yellow-500 rounded-full shadow-lg" 
+             style={{ animation: 'pulse 2s ease-in-out infinite 1s' }} />
+      </div>
+      
+      {/* Overlay info */}
+      <div className="absolute top-4 left-4 bg-black/70 rounded-lg p-3 backdrop-blur-sm">
+        <div className="text-white text-sm font-bold">NASA Terrain Preview</div>
+        <div className="text-gray-300 text-xs">SRTM Elevation + Landsat Imagery</div>
+      </div>
+
+      {/* Inline styles for animations */}
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateX(0px) translateY(0px); }
+          50% { transform: translateX(10px) translateY(-5px); }
+        }
+        
+        @keyframes orbit {
+          0% { transform: rotate(0deg) translateX(80px) rotate(0deg); }
+          100% { transform: rotate(360deg) translateX(80px) rotate(-360deg); }
+        }
+
+        @keyframes pulse {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.7; transform: scale(1.1); }
+        }
+      `}</style>
+    </div>
+  )
+}
 
 export default function FarmDashboard() {
   return (
@@ -220,20 +276,20 @@ export default function FarmDashboard() {
         <Card className="bg-black/80 backdrop-blur-xl border border-blue-500/30">
           <CardHeader>
             <CardTitle className="text-white flex items-center gap-2">
-              <Satellite className="w-5 h-5 text-blue-400" />
+              <Mountain className="w-5 h-5 text-blue-400" />
               NASA Real Terrain Preview
             </CardTitle>
             <p className="text-sm text-gray-400">
-              Real SRTM elevation data with Landsat satellite imagery
+              Interactive terrain visualization with real elevation data
             </p>
           </CardHeader>
           <CardContent>
-            {/* ✅ 3D Viewer dynamically loaded */}
-            <SimpleWorking3D />
+            {/* ✅ Simple CSS-based 3D preview */}
+            <SimpleTerrainPreview />
             <div className="mt-4 text-center">
               <Button asChild>
                 <Link href="/farm/simulation" className="flex items-center gap-2">
-                  <Map className="w-4 h-4" />
+                  <Navigation className="w-4 h-4" />
                   Open Full 3D Simulation
                 </Link>
               </Button>
@@ -289,7 +345,7 @@ export default function FarmDashboard() {
               </div>
               <div>
                 <div className="text-blue-300 font-medium mb-1">🔵 3D Rendering</div>
-                <div className="text-gray-400">React Three Fiber + WebGL active</div>
+                <div className="text-gray-400">CSS 3D transforms active</div>
               </div>
               <div>
                 <div className="text-purple-300 font-medium mb-1">🟣 Real-time Data</div>

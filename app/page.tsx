@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import Image from "next/image"
 import { Satellite, Brain, Globe, Users, Zap, Shield, TrendingUp, Award, Play, ChevronRight, Database, Cpu, Cloud, MapPin } from "lucide-react"
+import NASAFarmNavigatorsSection  from "@/components/nasa-farm-nav"
 
 // ✅ Force static generation for low TTFB
 export const dynamic = "force-static"
@@ -52,6 +53,7 @@ export default function Page() {
                 <Link href="#technology" className="text-gray-300 hover:text-white transition-colors">Technology</Link>
                 <Link href="#data" className="text-gray-300 hover:text-white transition-colors">NASA Data</Link>
                 <Link href="#about" className="text-gray-300 hover:text-white transition-colors">About</Link>
+                <Link href="/ai" className="text-gray-300 hover:text-white transition-colors">AI</Link>
               </div>
               <div className="flex items-center space-x-4">
                 <Button variant="outline" className="border-white/20 text-white hover:bg-white/10">
@@ -240,92 +242,7 @@ export default function Page() {
 
         {/* NASA Farm Navigators Feature */}
         <section id="navigators" className="py-24 bg-gradient-to-br from-blue-900/20 to-purple-900/20">
-          <div className="container mx-auto px-6">
-            <div className="text-center mb-16">
-              <Badge className="bg-blue-600/20 backdrop-blur-md border border-blue-400/30 text-white px-6 py-3 mb-6 shadow-lg shadow-blue-500/20">
-                <Award className="w-4 h-4 mr-2" />
-                NASA Challenge Winner
-              </Badge>
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                <span className="text-blue-500">NASA Farm Navigators</span>
-                <br />Educational Farming Game
-              </h2>
-              <p className="text-xl text-gray-300 max-w-4xl mx-auto">
-                Learn precision agriculture through interactive scenarios using real NASA satellite data. 
-                Bridge the gap between complex Earth science data and practical farming applications.
-              </p>
-            </div>
-
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="space-y-8">
-                <div className="space-y-6">
-                  <div className="bg-black/20 backdrop-blur-xl border border-blue-500/30 rounded-xl p-6">
-                    <h3 className="text-2xl font-bold text-white mb-4">🎯 Educational Scenarios</h3>
-                    <div className="space-y-3">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-3 h-3 bg-blue-400 rounded-full" />
-                        <span className="text-gray-300">California Drought Management Challenge</span>
-                      </div>
-                      <div className="flex items-center space-x-3">
-                        <div className="w-3 h-3 bg-green-400 rounded-full" />
-                        <span className="text-gray-300">Midwest Crop Health Monitoring</span>
-                      </div>
-                      <div className="flex items-center space-x-3">
-                        <div className="w-3 h-3 bg-purple-400 rounded-full" />
-                        <span className="text-gray-300">Great Plains Precision Agriculture</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="bg-black/20 backdrop-blur-xl border border-blue-500/30 rounded-xl p-6">
-                    <h3 className="text-2xl font-bold text-white mb-4">🛰️ Real NASA Datasets</h3>
-                    <div className="grid grid-cols-2 gap-3">
-                      <Badge variant="outline" className="text-xs border-blue-400/30 text-blue-300">SMAP Soil Moisture</Badge>
-                      <Badge variant="outline" className="text-xs border-green-400/30 text-green-300">MODIS Vegetation</Badge>
-                      <Badge variant="outline" className="text-xs border-cyan-400/30 text-cyan-300">GPM Precipitation</Badge>
-                      <Badge variant="outline" className="text-xs border-orange-400/30 text-orange-300">ECOSTRESS ET</Badge>
-                      <Badge variant="outline" className="text-xs border-red-400/30 text-red-300">Landsat Imagery</Badge>
-                      <Badge variant="outline" className="text-xs border-yellow-400/30 text-yellow-300">VIIRS Fire Data</Badge>
-                    </div>
-                  </div>
-                </div>
-
-                <Button size="lg" className="bg-blue-600/80 backdrop-blur-xl border border-blue-400/50 hover:bg-blue-700/80 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-2xl shadow-blue-500/30">
-                  <Link href="/dashboard" className="flex items-center space-x-3">
-                    <Play className="w-6 h-6" />
-                    <span>Start Learning Now</span>
-                    <ChevronRight className="w-5 h-5" />
-                  </Link>
-                </Button>
-              </div>
-
-              <div className="relative">
-                <div className="bg-black/40 backdrop-blur-xl border border-blue-500/30 rounded-2xl p-8 shadow-2xl shadow-blue-500/20">
-                  <div className="aspect-video bg-gradient-to-br from-blue-900/40 to-green-900/40 rounded-xl flex items-center justify-center mb-6">
-                    <div className="text-center text-white">
-                      <Satellite className="w-16 h-16 mx-auto mb-4 text-blue-400" />
-                      <p className="text-lg font-semibold">Interactive Farm Visualization</p>
-                      <p className="text-sm text-gray-300">Canvas-based NASA data overlay</p>
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-3 gap-4">
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-white">75</div>
-                      <div className="text-xs text-gray-400">Sustainability Score</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-white">82</div>
-                      <div className="text-xs text-gray-400">Yield Potential</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-white">2/4</div>
-                      <div className="text-xs text-gray-400">Objectives Complete</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <NASAFarmNavigatorsSection />
         </section>
 
         {/* Core Features Showcase */}
